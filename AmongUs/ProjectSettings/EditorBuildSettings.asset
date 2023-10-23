@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/InfoGamerAssets/PUN2_Matchmaking/QuickStart/Scenes/QuickStartMenuDemo.unity
+    guid: b5ecc2677a341b3479123807bf4882f7
+  - enabled: 1
     path: Assets/Scenes/WaitingRoom.unity
     guid: 8c5d8611553462642b4c6d4736081aa6
   - enabled: 1
