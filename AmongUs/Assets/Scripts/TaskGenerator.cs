@@ -24,15 +24,7 @@ namespace QuizletBackend
     {
         // Main is used for displaying the working version of said code
         // It should not be enable or used in the final implementation
-        public struct TaskQnA
-        {
-            public int Question { get; set; } 
-            public int Answer1ID { get; set; }
-            public int Answer2ID { get; set; }
-            public int Answer3ID { get; set; }
-            public int Answer4ID { get; set; }
-            public int CorrectAns { get; set; }
-        }
+        
 
         static void Main()
         {

@@ -13,6 +13,7 @@ namespace QuizletBackend
     public class QuizletValidation : MonoBehaviour
     {
         public TMP_InputField textObject;
+        [SerializeField] GameObject quizletInformation;
 
         public void OnButtonClick()
         {

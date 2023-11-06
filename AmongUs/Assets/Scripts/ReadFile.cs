@@ -12,17 +12,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 
+
+
 namespace QuizletBackend
 {
     public class ReadFile
     {
-        // This is an example structure for how we will store questions and answers, replace later with our actual structures.
-        public struct QuestionsAndAnswers
-        {
-            public string Question { get; set; }
-            public int ID { get; set; }
-            public string Answer { get; set; }
-        }
+        
 
         // comment out or remove this when taking code for implementation
         // main function is only used to verify results as working
