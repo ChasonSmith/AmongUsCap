@@ -1,0 +1,21 @@
+Bias	Arises when the design of a study is very likely to underestimate or overestimate the value you want to know
+Cluster Sample	A sampling method in which you first divide the population into smaller groups that mirror the characteristics of the population and random groups are chosen
+Confounding	This occurs when two variables are associated in such a way that their effects on a response variable cannot be distinguished from each other
+Control Group	A group that receives no treatment or a baseline treatment
+Control, Random Assignment, Replication	Name the three principles of experimental design
+Convenience Sample	Choosing individuals who are easiest to reach to collect results
+Experimental Study	A study that deliberately imposes some treatment on individuals to measure their responses
+Experimental Units	The collection of individuals to which treatments are applied
+Lurking Variable	A variable that is not being measured but could affect the response in an experiment
+Nonresponse	When an individual chosen for the sample can't be contacted or refuses to participate in the sample
+Observational Study	A study that observes individuals and measures variables of interest
+Population	The entire group of individuals about which we want information
+Random Assignment	A study in which the treatments are assigned to all the experimental units completely by chance
+Response Bias	A systematic pattern of incorrect responses in a sample survey
+Sample	The part of the population from which we actually collect information
+Simple Random Sample	A sampling method in which individuals from the population are chosen in such a way that every set of individuals has an equal chance to be the sample actually selected
+Stratified Sample	A sampling method in which the population is first classified into groups of similar individuals and individuals from each group are chosen
+Systematic Sample	A sampling method in which each nth person is chosen to participate in the survey
+Treatment	A specific condition applied to the individuals in an experiment
+Undercoverage	When some groups in the population are left out of the process of choosing the sample
+Voluntary Response Sample	A sampling method that consists of people who choose to responding to a general appeal survey
