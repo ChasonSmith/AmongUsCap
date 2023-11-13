@@ -1,6 +1,7 @@
 ﻿using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using TMPro;
 
 public class QuickStartLobbyController : MonoBehaviourPunCallbacks
 {
@@ -8,10 +9,12 @@ public class QuickStartLobbyController : MonoBehaviourPunCallbacks
     private GameObject quickLoadingButton; //Displays loading while connecting to Photon servers.
     [SerializeField]
     private GameObject quickStartButton; //button used for creating and joining a game.
-    [SerializeField]
-    private GameObject quickCancelButton; //button used to stop searing for a game to join.
+    //[SerializeField]
+    //private GameObject quickCancelButton; //button used to stop searing for a game to join.
     [SerializeField]
     private int roomSize; //Manual set the number of player in the room at one time.
+    public TMP_Text CreateRoomName;
+    public TMP_Text JoinRoomName;
 
     public override void OnConnectedToMaster() //Callback function for when the first connection is established successfully.
     {
@@ -23,9 +26,27 @@ public class QuickStartLobbyController : MonoBehaviourPunCallbacks
     public void QuickStart() //Paired to the Quick Start button
     {
         quickStartButton.SetActive(false);
-        quickCancelButton.SetActive(true);
+        //quickCancelButton.SetActive(true);
         PhotonNetwork.JoinRandomRoom(); //First tries to join an existing room
         Debug.Log("Quick start");
+    }
+
+    public void JoinOrCreate_Create() //Paired to the Quick Start button
+    {
+        RoomOptions options = new RoomOptions();
+        options.MaxPlayers = 10;
+        if(CreateRoomName.text != ""){
+            PhotonNetwork.JoinOrCreateRoom(CreateRoomName.text, options, TypedLobby.Default);
+        }
+    }
+
+    public void JoinOrCreate_Join() //Paired to the Quick Start button
+    {
+        RoomOptions options = new RoomOptions();
+        options.MaxPlayers = 10;
+        if(JoinRoomName.text != ""){
+            PhotonNetwork.JoinOrCreateRoom(JoinRoomName.text, options, TypedLobby.Default);
+        }
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message) //Callback function for if we fail to join a rooom
@@ -49,10 +70,10 @@ public class QuickStartLobbyController : MonoBehaviourPunCallbacks
         CreateRoom(); //Retrying to create a new room with a different name.
     }
 
-    public void QuickCancel() //Paired to the cancel button. Used to stop looking for a room to join.
-    {
-        quickCancelButton.SetActive(false);
-        quickStartButton.SetActive(true);
-        PhotonNetwork.LeaveRoom();
-    }
+    // public void QuickCancel() //Paired to the cancel button. Used to stop looking for a room to join.
+    // {
+    //     quickCancelButton.SetActive(false);
+    //     quickStartButton.SetActive(true);
+    //     PhotonNetwork.LeaveRoom();
+    // }
 }
