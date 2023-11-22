@@ -18,7 +18,12 @@ public class QnA : MonoBehaviour
     public TMP_Text answer3;
     public TMP_Text answer4;
     public TMP_Text LogAnswer;
-    
+
+    public Button A1;
+    public Button A2;
+    public Button A3;
+    public Button A4;
+
     public struct Question {
         public string question;
         public string answer;
@@ -126,13 +131,17 @@ public class QnA : MonoBehaviour
     {
         if (LogAnswer.text == buttonText.text)
         {
+            DisableButtons();
             Debug.Log("Correct!");
-            CloseQuiz();
+            ShowAnswers();
+            Invoke("CloseQuiz", 3);
         }
         else
         {
+            DisableButtons();
             Debug.Log("Wrong!");
-            CloseQuiz();
+            ShowAnswers();
+            Invoke("CloseQuiz", 3);
         }
     }
 
@@ -186,5 +195,40 @@ public class QnA : MonoBehaviour
         }
 
         return temp;
+    }
+
+    // This function will change all the button colors to red or green, depending on if they are the right answer or not
+    public void ShowAnswers()
+    {
+        A1.GetComponent<Image>().color = Color.green;
+        if (LogAnswer.text == answer1.text)
+            A1.GetComponent<Image>().color = Color.green;
+        else
+            A1.GetComponent<Image>().color = Color.red;
+
+        if (LogAnswer.text == answer2.text)
+            A2.GetComponent<Image>().color = Color.green;
+        else
+            A2.GetComponent<Image>().color = Color.red;
+
+        if (LogAnswer.text == answer3.text)
+            A3.GetComponent<Image>().color = Color.green;
+        else
+            A3.GetComponent<Image>().color = Color.red;
+
+        if (LogAnswer.text == answer4.text)
+            A4.GetComponent<Image>().color = Color.green;
+        else
+            A4.GetComponent<Image>().color = Color.red;
+
+
+    }
+
+    public void DisableButtons()
+    {
+        A1.enabled = false;
+        A2.enabled = false;
+        A3.enabled = false;
+        A4.enabled = false;
     }
 }
