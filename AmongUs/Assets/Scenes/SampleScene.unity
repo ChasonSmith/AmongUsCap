@@ -1796,8 +1796,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 711, y: -402}
-  m_SizeDelta: {x: 300, y: 50}
+  m_AnchoredPosition: {x: 745, y: -410}
+  m_SizeDelta: {x: 480, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &409593252
 MonoBehaviour:
@@ -2051,7 +2051,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 480, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &506096212
 CanvasRenderer:
@@ -2111,7 +2111,7 @@ MonoBehaviour:
   m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -4937,7 +4937,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 480, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &984409922
 CanvasRenderer:
@@ -4997,7 +4997,7 @@ MonoBehaviour:
   m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -7388,6 +7388,10 @@ MonoBehaviour:
   answer3: {fileID: 1452990409}
   answer4: {fileID: 506096213}
   LogAnswer: {fileID: 1722359134}
+  A1: {fileID: 1666042417}
+  A2: {fileID: 1841254724}
+  A3: {fileID: 2006543133}
+  A4: {fileID: 409593252}
   quiz: {fileID: 1392783424}
 --- !u!1001 &1418305911
 PrefabInstance:
@@ -7560,7 +7564,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 480, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1452990408
 CanvasRenderer:
@@ -7620,7 +7624,7 @@ MonoBehaviour:
   m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -8723,8 +8727,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 257, y: -248}
-  m_SizeDelta: {x: 300, y: 50}
+  m_AnchoredPosition: {x: 255, y: -250}
+  m_SizeDelta: {x: 480, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1666042417
 MonoBehaviour:
@@ -9477,8 +9481,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 714, y: -248}
-  m_SizeDelta: {x: 300, y: 50}
+  m_AnchoredPosition: {x: 745, y: -250}
+  m_SizeDelta: {x: 480, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1841254724
 MonoBehaviour:
@@ -9848,8 +9852,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 263, y: -398}
-  m_SizeDelta: {x: 300, y: 50}
+  m_AnchoredPosition: {x: 255, y: -410}
+  m_SizeDelta: {x: 480, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2006543133
 MonoBehaviour:
@@ -10197,8 +10201,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000030517578, y: 0.000045776367}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 480, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2046591258
 MonoBehaviour:
@@ -10250,7 +10254,7 @@ MonoBehaviour:
   m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -10910,6 +10914,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 924990499342725054, guid: f0d9755f7049c284da029e0575f1fe3c, type: 3}
+      propertyPath: A1
+      value: 
+      objectReference: {fileID: 1666042417}
+    - target: {fileID: 924990499342725054, guid: f0d9755f7049c284da029e0575f1fe3c, type: 3}
+      propertyPath: A2
+      value: 
+      objectReference: {fileID: 1841254724}
+    - target: {fileID: 924990499342725054, guid: f0d9755f7049c284da029e0575f1fe3c, type: 3}
+      propertyPath: A3
+      value: 
+      objectReference: {fileID: 2006543133}
+    - target: {fileID: 924990499342725054, guid: f0d9755f7049c284da029e0575f1fe3c, type: 3}
+      propertyPath: A4
+      value: 
+      objectReference: {fileID: 409593252}
     - target: {fileID: 924990499342725054, guid: f0d9755f7049c284da029e0575f1fe3c, type: 3}
       propertyPath: miniGame
       value: 
