@@ -23,18 +23,26 @@ public class QnA : MonoBehaviour
     public Button A2;
     public Button A3;
     public Button A4;
+    public Button Close;
 
     public struct Question {
         public string question;
         public string answer;
     }
     // Start is called before the first frame update
+
+
     void Start()
     {
         AskQ();
     }
+
     void AskQ()
     {
+        Debug.Log("HELPMEPLS");
+        ResetColor();
+        DisableButtons();
+        Invoke("EnableButtons", 3);
         /*Question Q1;
         Question Q2;
         Question Q3;
@@ -226,9 +234,27 @@ public class QnA : MonoBehaviour
 
     public void DisableButtons()
     {
-        A1.enabled = false;
-        A2.enabled = false;
-        A3.enabled = false;
-        A4.enabled = false;
+        A1.interactable = false;
+        A2.interactable = false;
+        A3.interactable = false;
+        A4.interactable = false;
+        Close.interactable = false;
+    }
+
+    public void EnableButtons()
+    {
+        A1.interactable = true;
+        A2.interactable = true;
+        A3.interactable = true;
+        A4.interactable = true;
+        Close.interactable = true;
+    }
+
+    public void ResetColor()
+    {
+        A1.GetComponent<Image>().color = Color.white;
+        A2.GetComponent<Image>().color = Color.white;
+        A3.GetComponent<Image>().color = Color.white;
+        A4.GetComponent<Image>().color = Color.white;
     }
 }

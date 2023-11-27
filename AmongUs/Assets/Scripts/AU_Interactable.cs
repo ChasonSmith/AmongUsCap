@@ -46,16 +46,5 @@ public class AU_Interactable : MonoBehaviour
         // Invoke("EnableButtons", 3);
     }
 
-    public void EnableButtons()
-    {
-        A1.GetComponent<Image>().color = Color.white;
-        A2.GetComponent<Image>().color = Color.white;
-        A3.GetComponent<Image>().color = Color.white;
-        A4.GetComponent<Image>().color = Color.white;
-        A1.enabled = true;
-        A2.enabled = true;
-        A3.enabled = true;
-        A4.enabled = true;
-
-    }
+    
 }

@@ -7392,6 +7392,7 @@ MonoBehaviour:
   A2: {fileID: 1841254724}
   A3: {fileID: 2006543133}
   A4: {fileID: 409593252}
+  Close: {fileID: 1341925736}
   quiz: {fileID: 1392783424}
 --- !u!1001 &1418305911
 PrefabInstance:
