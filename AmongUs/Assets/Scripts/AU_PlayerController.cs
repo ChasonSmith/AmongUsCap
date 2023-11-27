@@ -1,14 +1,15 @@
 using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 public class AU_PlayerController : MonoBehaviour, IPunObservable
 {
     [SerializeField] bool hasControl;
     public static AU_PlayerController localPlayer;
-    
     //Components
     Rigidbody myRB;
     Animator myAnim;
@@ -32,10 +33,11 @@ public class AU_PlayerController : MonoBehaviour, IPunObservable
     float killInput;
     List<AU_PlayerController> targets;
     [SerializeField] Collider myCollider;
-    bool isDead;
+    public bool isDead;
     [SerializeField] GameObject bodyPrefab;
     public static List<Transform> allBodies;
     List<Transform> bodiesFound;
+    public static List<AU_Body> allBod;
     [SerializeField] InputAction REPORT;
     [SerializeField] LayerMask ignoreForBody;
     //Interaction
@@ -48,6 +50,10 @@ public class AU_PlayerController : MonoBehaviour, IPunObservable
     PhotonView myPV;
     [SerializeField] GameObject lightMask;
     [SerializeField] lightcaster myLightCaster;
+    [SerializeField] SpriteRenderer tempBodySprite;
+    [SerializeField] SpriteRenderer tempPartSprite;
+    public TMP_Text syncCheck;
+    public TMP_Text syncCheckBR;
     private void Awake()
     {
         KILL.performed += KillTarget;
@@ -93,15 +99,69 @@ public class AU_PlayerController : MonoBehaviour, IPunObservable
             return;
         }
         if (myColor == Color.clear)
+        {
             myColor = Color.white;
-        myAvatarSprite.color = myColor;
+        }
+        
+        
+        //myAvatarSprite.color = myColor;
         if(allBodies == null)
         {
             allBodies = new List<Transform>();
         }
+        if(allBod == null)
+        {
+            allBod = new List<AU_Body>();
+        }
         bodiesFound = new List<Transform>();
         if (myHatSprite != null)
+        {
             myHatHolder.sprite = myHatSprite;
+        }
+        if(myPV.IsMine)
+        {
+            SetColor(myColor);
+        }
+    }
+
+    public void SetColor(Color newColor)
+    {
+        myColor = newColor;
+        if (myAvatarSprite != null)
+        {
+            myAvatarSprite.color = myColor;
+            int R;
+            int G;
+            int B;
+            R = (int)(myColor.r * 255);
+            G = (int)(myColor.g * 255);
+            B = (int)(myColor.b * 255);
+            myPV.RPC("SyncColor", RpcTarget.All, R, G, B); // Sync color across network
+        }
+    }
+
+    // public void SetColor(Color newColor)
+    // {
+    //     myColor = newColor;
+    //     if (myAvatarSprite != null)
+    //     {
+    //         myAvatarSprite.color = myColor;
+    //     }
+    // }
+
+    // RPC to synchronize color across all players
+    [PunRPC]
+    void SyncColor(int R, int G, int B)
+    {
+        float floatRed = R / 255f;
+        float floatGreen = G / 255f;
+        float floatBlue = B / 255f;
+        Color reconstructedColor = new Color(floatRed, floatGreen, floatBlue);
+        myColor = reconstructedColor;
+        if (myAvatarSprite != null)
+        {
+            myAvatarSprite.color = myColor;
+        }
     }
 
     void BodySearch()
@@ -116,8 +176,8 @@ public class AU_PlayerController : MonoBehaviour, IPunObservable
                 
                 if (hit.transform == body)
                 {
-                    Debug.Log(hit.transform.name);
-                    Debug.Log(bodiesFound.Count);
+                    //Debug.Log(hit.transform.name);
+                    //Debug.Log(bodiesFound.Count);
                     if (bodiesFound.Contains(body.transform))
                         return;
                     bodiesFound.Add(body.transform);
@@ -143,21 +203,55 @@ public class AU_PlayerController : MonoBehaviour, IPunObservable
             direction = Mathf.Sign(movementInput.x);
             
         }
-        
-        if(allBodies.Count > 0)
-        {
-            BodySearch();
-        }
+        syncCheck.text = allBod.Count.ToString();
+        syncCheckBR.text = bodiesFound.Count.ToString();
+        // if(allBodies.Count > 0)
+        // {
+        //     BodySearch();
+        // }
         if(REPORT.triggered)
         {
             if (bodiesFound.Count == 0)
                 return;
             Transform tempBody = bodiesFound[bodiesFound.Count - 1];
-            allBodies.Remove(tempBody);
-            bodiesFound.Remove(tempBody);
+            // allBodies.Clear();
+            // foreach (AU_Body bod in allBod){
+            //     tempBodySprite = bod.bodySprite;
+            //     tempPartSprite = bod.partSprite;
+            myPV.RPC("RPC_disableBody", RpcTarget.All);
+            // }
+            // allBod.Clear();
+            //bodiesFound.Clear();
+            
             tempBody.GetComponent<AU_Body>().Report();
         }
         mousePositionInput = MOUSE.ReadValue<Vector2>();
+        
+    }
+
+    [PunRPC]
+    void RPC_disableBody()
+    {
+        
+        allBodies.Clear();
+        foreach (AU_Body bod in allBod){
+            tempBodySprite = bod.bodySprite;
+            tempPartSprite = bod.partSprite;
+            tempBodySprite.enabled = false;
+            tempPartSprite.enabled = false;
+            bod.sphereCollider.enabled = false;
+            Debug.Log("Destroy");
+        }
+        allBod.Clear();
+        if(bodiesFound != null)
+        {
+            bodiesFound.Clear();
+        }
+        else
+        {
+            bodiesFound = new List<Transform>();
+            bodiesFound.Clear();
+        }
         
     }
     private void FixedUpdate()
@@ -166,14 +260,7 @@ public class AU_PlayerController : MonoBehaviour, IPunObservable
             return;
         myRB.velocity = movementInput * movementSpeed;
     }
-    public void SetColor(Color newColor)
-    {
-        myColor = newColor;
-        if (myAvatarSprite != null)
-        {
-            myAvatarSprite.color = myColor;
-        }
-    }
+    
     public void SetHat(Sprite newHat)
     {
         myHatSprite = newHat;
@@ -181,33 +268,54 @@ public class AU_PlayerController : MonoBehaviour, IPunObservable
     }
     public void SetRole(bool newRole)
     {
+        //Debug.Log("New role " + newRole);
         isImposter = newRole;
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if(other != null)
         {
-            AU_PlayerController tempTarget = other.GetComponent<AU_PlayerController>();
-            if (isImposter)
+            if (other.tag == "Player")
             {
-                if (tempTarget.isImposter)
-                    return;
-                else
+                AU_PlayerController tempTarget = other.GetComponent<AU_PlayerController>();
+                if (isImposter)
                 {
-                    targets.Add(tempTarget);
-                    
+                    if (tempTarget.isImposter)
+                        return;
+                    else
+                    {
+                        targets.Add(tempTarget);
+                        
+                    }
+                }
+            }
+            else if(other.tag == "Body")
+            {
+                if(bodiesFound != null)
+                {
+                    bodiesFound.Add(other.transform);
                 }
             }
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player")
+        if(other != null)
         {
-            AU_PlayerController tempTarget = other.GetComponent<AU_PlayerController>();
-            if (targets.Contains(tempTarget))
+            if (other.tag == "Player")
             {
-                    targets.Remove(tempTarget);
+                AU_PlayerController tempTarget = other.GetComponent<AU_PlayerController>();
+                if (targets.Contains(tempTarget))
+                {
+                        targets.Remove(tempTarget);
+                }
+            }
+            else if(other.tag == "Body")
+            {
+                if(bodiesFound != null)
+                {
+                    bodiesFound.Remove(other.transform);
+                }
             }
         }
     }
@@ -235,10 +343,24 @@ public class AU_PlayerController : MonoBehaviour, IPunObservable
         }
     }
 
+
     [PunRPC]
     void RPC_Kill()
     {
-        Die();
+        if (!myPV.IsMine)
+            return;
+        
+        //AU_Body tempBody = Instantiate(bodyPrefab, transform.position, transform.rotation).GetComponent<AU_Body>();
+        AU_Body tempBody = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "AU_Body"), transform.position, transform.rotation).GetComponent<AU_Body>();
+        tempBody.SetColor(myAvatarSprite.color);
+        //edit
+        gameObject.layer = 8;
+        myCollider.enabled = false;
+        //allBod.Add(tempBody);
+        Debug.Log("bodies num: " + allBod.Count);
+        isDead = true;
+        myAnim.SetBool("IsDead", isDead);
+        //Die();
     }
 
     public void Die()
@@ -249,18 +371,21 @@ public class AU_PlayerController : MonoBehaviour, IPunObservable
         //AU_Body tempBody = Instantiate(bodyPrefab, transform.position, transform.rotation).GetComponent<AU_Body>();
         AU_Body tempBody = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "AU_Body"), transform.position, transform.rotation).GetComponent<AU_Body>();
         tempBody.SetColor(myAvatarSprite.color);
+        //edit
+        gameObject.layer = 8;
+        myCollider.enabled = false;
+        //allBod.Add(tempBody);
+        Debug.Log("bodies num: " + allBod.Count);
         isDead = true;
         myAnim.SetBool("IsDead", isDead);
-        //edit
-        gameObject.layer = 6;
-        myCollider.enabled = false;
     }
+    
     
     void Interact(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            Debug.Log("Here");
+            //Debug.Log("Here");
             RaycastHit hit;
             Ray ray = myCamera.ScreenPointToRay(mousePositionInput);
             if (Physics.Raycast(ray, out hit,interactLayer))
@@ -268,6 +393,7 @@ public class AU_PlayerController : MonoBehaviour, IPunObservable
                 if (hit.transform.tag == "Interactable")
                 {
                     AU_Interactable temp = hit.transform.GetComponent<AU_Interactable>();
+                    Debug.Log("function not called");
                     temp.PlayMiniGame();
                 }
                 /*
@@ -295,19 +421,29 @@ public class AU_PlayerController : MonoBehaviour, IPunObservable
         {
             stream.SendNext(direction);
             stream.SendNext(isImposter);
+            //stream.SendNext(myColor);
+            //stream.SendNext(myColor);
+            //Debug.Log("send");
         }
         else
         {
             this.direction = (float)stream.ReceiveNext();
             this.isImposter = (bool)stream.ReceiveNext();
+            //myColor = (Color)stream.ReceiveNext();
+            //this.myColor = (Color)stream.ReceiveNext();
+            //Debug.Log("do Something");
+            //Debug.Log((bool)stream.ReceiveNext());
         }
     }
 
     public void BecomeImposter(int ImposterNumber)
     {
+        //Debug.Log(ImposterNumber);
         if(PhotonNetwork.LocalPlayer == PhotonNetwork.PlayerList[ImposterNumber])
         {
-            isImposter = true;
+            //Debug.Log(isImposter);
+                isImposter = true;
+            //Debug.Log(isImposter);
         }
     }
     

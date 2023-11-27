@@ -42,6 +42,9 @@ MonoBehaviour:
   - RPC_Kill
   - RPC_Play
   - RPC_SyncImposter
+  - SetSpriteEnabled
+  - RPC_disableBody
+  - SyncColor
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

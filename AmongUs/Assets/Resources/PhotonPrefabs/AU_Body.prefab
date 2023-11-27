@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8156705605193450649}
   m_Layer: 6
   m_Name: AU_Body
-  m_TagString: Untagged
+  m_TagString: Body
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49,6 +49,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodySprite: {fileID: 305180281028012720}
+  partSprite: {fileID: 752579026837606192}
+  sphereCollider: {fileID: 1936511812561171713}
 --- !u!54 &8572736550508898183
 Rigidbody:
   m_ObjectHideFlags: 0

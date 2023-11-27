@@ -6,6 +6,7 @@ public class AU_GameController : MonoBehaviour
 {
     PhotonView myPV;
     int whichPlayerIsImposter;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -17,13 +18,15 @@ public class AU_GameController : MonoBehaviour
     }
     void PickImposter()
     {
-        whichPlayerIsImposter = Random.Range(0, PhotonNetwork.CurrentRoom.PlayerCount);
+        //0 would be player 1 but its not working for player1.
+        whichPlayerIsImposter = Random.Range(1, PhotonNetwork.CurrentRoom.PlayerCount);
         myPV.RPC("RPC_SyncImposter", RpcTarget.All, whichPlayerIsImposter);
         Debug.Log("Imposter " + whichPlayerIsImposter);
     }
     [PunRPC]
     void RPC_SyncImposter(int playerNumber)
     {
+        Debug.Log(playerNumber);
         whichPlayerIsImposter = playerNumber;
         AU_PlayerController.localPlayer.BecomeImposter(whichPlayerIsImposter);
     }
