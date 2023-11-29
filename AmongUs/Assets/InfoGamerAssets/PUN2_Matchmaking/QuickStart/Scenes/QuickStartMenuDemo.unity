@@ -4360,7 +4360,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8679798624227960657, guid: 9ea8b24e184253f4dae2ce4e156e9b05, type: 3}
       propertyPath: m_Text
-      value: Amoung Us
+      value: Among Scholars
       objectReference: {fileID: 0}
     - target: {fileID: 8679798624345078305, guid: 9ea8b24e184253f4dae2ce4e156e9b05, type: 3}
       propertyPath: m_Name
