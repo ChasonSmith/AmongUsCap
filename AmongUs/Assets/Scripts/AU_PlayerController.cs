@@ -4,12 +4,9 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.InputSystem;
-<<<<<<< Updated upstream
-=======
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
->>>>>>> Stashed changes
 public class AU_PlayerController : MonoBehaviour, IPunObservable
 {
     [SerializeField] bool hasControl;
@@ -39,13 +36,10 @@ public class AU_PlayerController : MonoBehaviour, IPunObservable
     float killInput;
     List<AU_PlayerController> targets;
     [SerializeField] Collider myCollider;
-<<<<<<< Updated upstream
-    bool isDead;
-=======
     [SerializeField] public bool isDead;
->>>>>>> Stashed changes
     [SerializeField] GameObject bodyPrefab;
     public static List<Transform> allBodies;
+    public static List<AU_Body> allBod;
     List<Transform> bodiesFound;
     [SerializeField] InputAction REPORT;
     [SerializeField] LayerMask ignoreForBody;
@@ -59,8 +53,6 @@ public class AU_PlayerController : MonoBehaviour, IPunObservable
     public PhotonView myPV;
     [SerializeField] GameObject lightMask;
     [SerializeField] lightcaster myLightCaster;
-<<<<<<< Updated upstream
-=======
     [SerializeField] SpriteRenderer tempBodySprite;
     [SerializeField] SpriteRenderer tempPartSprite;
     public TMP_Text syncCheck;
@@ -95,7 +87,6 @@ public class AU_PlayerController : MonoBehaviour, IPunObservable
     public int voteCastSkip;
     public int questCorr;
 
->>>>>>> Stashed changes
     private void Awake()
     {
         KILL.performed += KillTarget;
@@ -155,9 +146,8 @@ public class AU_PlayerController : MonoBehaviour, IPunObservable
         }
         bodiesFound = new List<Transform>();
         if (myHatSprite != null)
+        {
             myHatHolder.sprite = myHatSprite;
-<<<<<<< Updated upstream
-=======
         }
         if(myPV.IsMine)
         {
@@ -400,7 +390,6 @@ public class AU_PlayerController : MonoBehaviour, IPunObservable
         {
             myAvatarSprite.color = myColor;
         }
->>>>>>> Stashed changes
     }
 
     [PunRPC]
@@ -465,12 +454,6 @@ public class AU_PlayerController : MonoBehaviour, IPunObservable
             direction = Mathf.Sign(movementInput.x);
             
         }
-<<<<<<< Updated upstream
-        
-        if(allBodies.Count > 0)
-        {
-            BodySearch();
-=======
         syncCheck.text = allBod.Count.ToString();
         syncCheckBR.text = bodiesFound.Count.ToString();
         // if(allBodies.Count > 0)
@@ -511,7 +494,6 @@ public class AU_PlayerController : MonoBehaviour, IPunObservable
                 PhotonNetwork.LoadLevel(4);
                 SceneRan = true;
             }
->>>>>>> Stashed changes
         }
         if(REPORT.triggered)
         {
@@ -524,11 +506,6 @@ public class AU_PlayerController : MonoBehaviour, IPunObservable
                 return;
             }
             Transform tempBody = bodiesFound[bodiesFound.Count - 1];
-<<<<<<< Updated upstream
-            allBodies.Remove(tempBody);
-            bodiesFound.Remove(tempBody);
-            tempBody.GetComponent<AU_Body>().Report();
-=======
             // allBodies.Clear();
             // foreach (AU_Body bod in allBod){
             //     tempBodySprite = bod.bodySprite;
@@ -540,13 +517,10 @@ public class AU_PlayerController : MonoBehaviour, IPunObservable
             
             //tempBody.GetComponent<AU_Body>().Report();
             myPV.RPC("enableVote", RpcTarget.AllBuffered);
->>>>>>> Stashed changes
         }
         mousePositionInput = MOUSE.ReadValue<Vector2>();
         
     }
-<<<<<<< Updated upstream
-=======
 
     [PunRPC]
     void RPC_disableBody()
@@ -578,21 +552,20 @@ public class AU_PlayerController : MonoBehaviour, IPunObservable
 
         
     }
->>>>>>> Stashed changes
     private void FixedUpdate()
     {
         if (!myPV.IsMine)
             return;
         myRB.velocity = movementInput * movementSpeed;
     }
-    public void SetColor(Color newColor)
-    {
-        myColor = newColor;
-        if (myAvatarSprite != null)
-        {
-            myAvatarSprite.color = myColor;
-        }
-    }
+    // public void SetColor(Color newColor)
+    // {
+    //     myColor = newColor;
+    //     if (myAvatarSprite != null)
+    //     {
+    //         myAvatarSprite.color = myColor;
+    //     }
+    // }
     public void SetHat(Sprite newHat)
     {
         myHatSprite = newHat;
@@ -655,8 +628,6 @@ public class AU_PlayerController : MonoBehaviour, IPunObservable
         }
     }
 
-<<<<<<< Updated upstream
-=======
 
     // [PunRPC]
     // void SetDeadValue(int newValue)
@@ -676,7 +647,6 @@ public class AU_PlayerController : MonoBehaviour, IPunObservable
     //     }
     // }
 
->>>>>>> Stashed changes
     [PunRPC]
     public void RPC_Kill()
     {
@@ -701,8 +671,6 @@ public class AU_PlayerController : MonoBehaviour, IPunObservable
         //AU_Body tempBody = Instantiate(bodyPrefab, transform.position, transform.rotation).GetComponent<AU_Body>();
         AU_Body tempBody = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "AU_Body"), transform.position, transform.rotation).GetComponent<AU_Body>();
         tempBody.SetColor(myAvatarSprite.color);
-<<<<<<< Updated upstream
-=======
         //edit
 
         //gameObject.layer = 8;
@@ -713,7 +681,6 @@ public class AU_PlayerController : MonoBehaviour, IPunObservable
         myCollider.enabled = false;
         //allBod.Add(tempBody);
         //Debug.Log("bodies num: " + allBod.Count);
->>>>>>> Stashed changes
         isDead = true;
         myAnim.SetBool("IsDead", isDead);
         //edit
@@ -721,8 +688,6 @@ public class AU_PlayerController : MonoBehaviour, IPunObservable
         myCollider.enabled = false;
     }
     
-<<<<<<< Updated upstream
-=======
     [PunRPC]
     void enableVote()
     {
@@ -734,7 +699,6 @@ public class AU_PlayerController : MonoBehaviour, IPunObservable
         myPV.RPC("enableVote", RpcTarget.AllBuffered);
     }
     
->>>>>>> Stashed changes
     void Interact(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
@@ -747,9 +711,6 @@ public class AU_PlayerController : MonoBehaviour, IPunObservable
                 if (hit.transform.tag == "Interactable")
                 {
                     AU_Interactable temp = hit.transform.GetComponent<AU_Interactable>();
-<<<<<<< Updated upstream
-                    temp.PlayMiniGame();
-=======
                     if(temp.name == "VoteInteract")
                     {
                         myPV.RPC("enableVote", RpcTarget.AllBuffered);
@@ -759,7 +720,6 @@ public class AU_PlayerController : MonoBehaviour, IPunObservable
                         //Debug.Log("function not called");
                         temp.PlayMiniGame();
                     }
->>>>>>> Stashed changes
                 }
                 /*
                 if(hit.transform.tag == "Vent")
@@ -787,26 +747,20 @@ public class AU_PlayerController : MonoBehaviour, IPunObservable
         {
             stream.SendNext(direction);
             stream.SendNext(isImposter);
-<<<<<<< Updated upstream
-=======
             //stream.SendNext(numDead);
             //stream.SendNext(myColor);
             //stream.SendNext(myColor);
             //Debug.Log("send");
->>>>>>> Stashed changes
         }
         else
         {
             this.direction = (float)stream.ReceiveNext();
             this.isImposter = (bool)stream.ReceiveNext();
-<<<<<<< Updated upstream
-=======
             //this.numDead = (int)stream.ReceiveNext();
             //myColor = (Color)stream.ReceiveNext();
             //this.myColor = (Color)stream.ReceiveNext();
             //Debug.Log("do Something");
             //Debug.Log((bool)stream.ReceiveNext());
->>>>>>> Stashed changes
         }
     }
 
@@ -814,13 +768,9 @@ public class AU_PlayerController : MonoBehaviour, IPunObservable
     {
         if(PhotonNetwork.LocalPlayer == PhotonNetwork.PlayerList[ImposterNumber])
         {
-<<<<<<< Updated upstream
-            isImposter = true;
-=======
             //Debug.Log(isImposter);
             isImposter = true;
             //Debug.Log(isImposter);
->>>>>>> Stashed changes
         }
     }
     

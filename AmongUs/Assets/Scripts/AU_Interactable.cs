@@ -26,8 +26,6 @@ public class AU_Interactable : MonoBehaviour
     }
     public void PlayMiniGame()
     {
-<<<<<<< Updated upstream
-=======
         //Debug.Log("PMG");
         // We will disable the buttons and revert any previous colors of them back
         // A1.enabled = false; 
@@ -38,7 +36,6 @@ public class AU_Interactable : MonoBehaviour
         // A2.GetComponent<Image>().color = Color.gray;
         // A3.GetComponent<Image>().color = Color.gray;
         // A4.GetComponent<Image>().color = Color.gray;
->>>>>>> Stashed changes
         miniGame.SetActive(true);
     }
 }

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 public class AU_Body : MonoBehaviour
 {
-    [SerializeField] SpriteRenderer bodySprite;
+    [SerializeField] public SpriteRenderer bodySprite;
+    [SerializeField] public SpriteRenderer partSprite;
+    [SerializeField] public SphereCollider sphereCollider;
     public void SetColor(Color newColor)
     {
         bodySprite.color = newColor;
