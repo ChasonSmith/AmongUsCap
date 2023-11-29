@@ -42,6 +42,36 @@ MonoBehaviour:
   - RPC_Kill
   - RPC_Play
   - RPC_SyncImposter
+<<<<<<< Updated upstream
+=======
+  - SetSpriteEnabled
+  - RPC_disableBody
+  - SyncColor
+  - RPC_AddKill
+  - SyncTemp
+  - IncreaseTemp
+  - RPC_IncreaseTemp
+  - SetDeadValue
+  - EnablePanelRPC
+  - SyncName
+  - enableVote
+  - incVote
+  - incVote1
+  - incVote10
+  - incVote2
+  - incVote3
+  - incVote4
+  - incVote5
+  - incVote6
+  - incVote7
+  - incVote8
+  - incVote9
+  - incVoteSkip
+  - resetVote
+  - decCorr
+  - incCorr
+  - resCorr
+>>>>>>> Stashed changes
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

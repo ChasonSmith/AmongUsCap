@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using TMPro;
 using UnityEngine.UI;
 public class AU_CharacterCustomizer : MonoBehaviour
 {
@@ -11,6 +14,30 @@ public class AU_CharacterCustomizer : MonoBehaviour
     [SerializeField] GameObject hatPanel;
     [SerializeField] Button colorTabButton;
     [SerializeField] Button hatTabButton;
+
+    [SerializeField] GameObject customePanel;
+
+    [SerializeField] InputAction customOpen;
+
+    public TMP_Text pName;
+
+    private void OnEnable()
+    {
+        customOpen.Enable();
+    }
+    private void OnDisable()
+    {
+        customOpen.Disable();
+    }
+
+    void Update()
+    {
+        if(customOpen.triggered)
+        {
+            customePanel.SetActive(true);
+        }
+    }
+
     public void SetColor(int colorIndex)
     {
         //Debug.Log(allColors[colorIndex]);
@@ -37,5 +64,10 @@ public class AU_CharacterCustomizer : MonoBehaviour
         hatPanel.SetActive(true);
         colorTabButton.interactable = true;
         hatTabButton.interactable = false;
+    }
+
+    public void setUName()
+    {
+        AU_PlayerController.localPlayer.SetUsName(pName);
     }
 }

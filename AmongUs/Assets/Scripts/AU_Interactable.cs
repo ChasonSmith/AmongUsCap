@@ -13,6 +13,7 @@ public class AU_Interactable : MonoBehaviour
     {
         if(other.tag == "Player")
         {
+            //Debug.Log("this");
             highlight.SetActive(true);
         }
     }
@@ -25,6 +26,19 @@ public class AU_Interactable : MonoBehaviour
     }
     public void PlayMiniGame()
     {
+<<<<<<< Updated upstream
+=======
+        //Debug.Log("PMG");
+        // We will disable the buttons and revert any previous colors of them back
+        // A1.enabled = false; 
+        // A2.enabled = false; 
+        // A3.enabled = false; 
+        // A4.enabled = false;
+        // A1.GetComponent<Image>().color = Color.gray;
+        // A2.GetComponent<Image>().color = Color.gray;
+        // A3.GetComponent<Image>().color = Color.gray;
+        // A4.GetComponent<Image>().color = Color.gray;
+>>>>>>> Stashed changes
         miniGame.SetActive(true);
     }
 }
