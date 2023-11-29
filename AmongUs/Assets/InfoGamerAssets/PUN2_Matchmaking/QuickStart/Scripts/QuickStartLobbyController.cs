@@ -22,7 +22,7 @@ public class QuickStartLobbyController : MonoBehaviourPunCallbacks
         PhotonNetwork.AutomaticallySyncScene = true; //Makes it so whatever scene the master client has loaded is the scene all other clients will load
         quickStartButton.SetActive(true);
         quickLoadingButton.SetActive(false);
-        File.Delete("Assets/Scripts/quizlet.txt");
+        //File.Delete("Assets/Scripts/quizlet.txt");
     }
 
     public void QuickStart() //Paired to the Quick Start button
